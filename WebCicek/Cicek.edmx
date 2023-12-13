@@ -1,0 +1,734 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WebCicekModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AltKategoriler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="altkategoriad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="kategorino" Type="int" Nullable="false" />
+          <Property Name="aciklama" Type="varchar(max)" />
+          <Property Name="silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fatura">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="siparisid" Type="int" Nullable="false" />
+          <Property Name="faturabilgisi" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="gönderenisim" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="gönderentelefon" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="gönderenadres" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GonderilecekYer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="konum" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="aciklama" Type="varchar" MaxLength="50" />
+          <Property Name="silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GonderimAmaci">
+          <Key>
+            <PropertyRef Name="gonderimid" />
+          </Key>
+          <Property Name="gonderimid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="gonderimadi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="aciklama" Type="varchar(max)" />
+          <Property Name="silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="aciklama" Type="varchar(max)" />
+          <Property Name="silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanicilar">
+          <Key>
+            <PropertyRef Name="kullaniciID" />
+          </Key>
+          <Property Name="kullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="soyadi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="kullanicisifre" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SiparisDetay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urunid" Type="int" Nullable="false" />
+          <Property Name="siparisid" Type="int" Nullable="false" />
+          <Property Name="gonderilecekid" Type="int" Nullable="false" />
+          <Property Name="gamacid" Type="int" Nullable="false" />
+          <Property Name="aliciad" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="alicisoyad" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="alicitelefon" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="aliciadres" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="kartmesaji" Type="varchar" MaxLength="200" />
+          <Property Name="kartisim" Type="varchar" MaxLength="20" />
+          <Property Name="adet" Type="int" Nullable="false" />
+          <Property Name="fiyat" Type="money" Nullable="false" />
+          <Property Name="birim" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Siparisler">
+          <Key>
+            <PropertyRef Name="siparisid" />
+          </Key>
+          <Property Name="siparisid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullaniciID" Type="int" Nullable="false" />
+          <Property Name="tarih" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="tutar" Type="money" Nullable="false" />
+          <Property Name="odemesekli" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="siparisdurumu" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Urunler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urunkodu" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="urunad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="altkategorino" Type="int" Nullable="false" />
+          <Property Name="kategorino" Type="int" Nullable="false" />
+          <Property Name="gonderimid" Type="int" Nullable="false" />
+          <Property Name="aciklama" Type="varchar(max)" />
+          <Property Name="adet" Type="int" Nullable="false" />
+          <Property Name="fiyat" Type="money" Nullable="false" />
+          <Property Name="birim" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="resimyolu1" Type="varchar" MaxLength="50" />
+          <Property Name="resimyolu2" Type="varchar" MaxLength="50" />
+          <Property Name="silindi" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AltKategoriler_Kategoriler">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="1" />
+          <End Role="AltKategoriler" Type="Self.AltKategoriler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AltKategoriler">
+              <PropertyRef Name="kategorino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fatura_Siparisler">
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="1" />
+          <End Role="Fatura" Type="Self.Fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siparisler">
+              <PropertyRef Name="siparisid" />
+            </Principal>
+            <Dependent Role="Fatura">
+              <PropertyRef Name="siparisid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_GonderilecekYer">
+          <End Role="GonderilecekYer" Type="Self.GonderilecekYer" Multiplicity="1" />
+          <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GonderilecekYer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SiparisDetay">
+              <PropertyRef Name="gonderilecekid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_GonderimAmaci">
+          <End Role="GonderimAmaci" Type="Self.GonderimAmaci" Multiplicity="1" />
+          <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GonderimAmaci">
+              <PropertyRef Name="gonderimid" />
+            </Principal>
+            <Dependent Role="SiparisDetay">
+              <PropertyRef Name="gamacid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_Siparisler">
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="1" />
+          <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siparisler">
+              <PropertyRef Name="siparisid" />
+            </Principal>
+            <Dependent Role="SiparisDetay">
+              <PropertyRef Name="siparisid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_Urunler">
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="1" />
+          <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urunler">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SiparisDetay">
+              <PropertyRef Name="urunid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparisler_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="kullaniciID" />
+            </Principal>
+            <Dependent Role="Siparisler">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_AltKategoriler">
+          <End Role="AltKategoriler" Type="Self.AltKategoriler" Multiplicity="1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AltKategoriler">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="altkategorino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_GonderimAmaci">
+          <End Role="GonderimAmaci" Type="Self.GonderimAmaci" Multiplicity="1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GonderimAmaci">
+              <PropertyRef Name="gonderimid" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="gonderimid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Kategoriler">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="kategorino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebCicekModelStoreContainer">
+          <EntitySet Name="AltKategoriler" EntityType="Self.AltKategoriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fatura" EntityType="Self.Fatura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GonderilecekYer" EntityType="Self.GonderilecekYer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GonderimAmaci" EntityType="Self.GonderimAmaci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiparisDetay" EntityType="Self.SiparisDetay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Siparisler" EntityType="Self.Siparisler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AltKategoriler_Kategoriler" Association="Self.FK_AltKategoriler_Kategoriler">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="AltKategoriler" EntitySet="AltKategoriler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fatura_Siparisler" Association="Self.FK_Fatura_Siparisler">
+            <End Role="Siparisler" EntitySet="Siparisler" />
+            <End Role="Fatura" EntitySet="Fatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_GonderilecekYer" Association="Self.FK_SiparisDetay_GonderilecekYer">
+            <End Role="GonderilecekYer" EntitySet="GonderilecekYer" />
+            <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_GonderimAmaci" Association="Self.FK_SiparisDetay_GonderimAmaci">
+            <End Role="GonderimAmaci" EntitySet="GonderimAmaci" />
+            <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_Siparisler" Association="Self.FK_SiparisDetay_Siparisler">
+            <End Role="Siparisler" EntitySet="Siparisler" />
+            <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_Urunler" Association="Self.FK_SiparisDetay_Urunler">
+            <End Role="Urunler" EntitySet="Urunler" />
+            <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparisler_Kullanicilar" Association="Self.FK_Siparisler_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Siparisler" EntitySet="Siparisler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_AltKategoriler" Association="Self.FK_Urunler_AltKategoriler">
+            <End Role="AltKategoriler" EntitySet="AltKategoriler" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_GonderimAmaci" Association="Self.FK_Urunler_GonderimAmaci">
+            <End Role="GonderimAmaci" EntitySet="GonderimAmaci" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Kategoriler" Association="Self.FK_Urunler_Kategoriler">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebCicekModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AltKategoriler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="altkategoriad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kategorino" Type="Int32" Nullable="false" />
+          <Property Name="aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Kategoriler" Relationship="Self.FK_AltKategoriler_Kategoriler" FromRole="AltKategoriler" ToRole="Kategoriler" />
+          <NavigationProperty Name="Urunler" Relationship="Self.FK_Urunler_AltKategoriler" FromRole="AltKategoriler" ToRole="Urunler" />
+        </EntityType>
+        <EntityType Name="Fatura">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="siparisid" Type="Int32" Nullable="false" />
+          <Property Name="faturabilgisi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gönderenisim" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gönderentelefon" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gönderenadres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Siparisler" Relationship="Self.FK_Fatura_Siparisler" FromRole="Fatura" ToRole="Siparisler" />
+        </EntityType>
+        <EntityType Name="GonderilecekYer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="konum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SiparisDetay" Relationship="Self.FK_SiparisDetay_GonderilecekYer" FromRole="GonderilecekYer" ToRole="SiparisDetay" />
+        </EntityType>
+        <EntityType Name="GonderimAmaci">
+          <Key>
+            <PropertyRef Name="gonderimid" />
+          </Key>
+          <Property Name="gonderimid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gonderimadi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SiparisDetay" Relationship="Self.FK_SiparisDetay_GonderimAmaci" FromRole="GonderimAmaci" ToRole="SiparisDetay" />
+          <NavigationProperty Name="Urunler" Relationship="Self.FK_Urunler_GonderimAmaci" FromRole="GonderimAmaci" ToRole="Urunler" />
+        </EntityType>
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AltKategoriler" Relationship="Self.FK_AltKategoriler_Kategoriler" FromRole="Kategoriler" ToRole="AltKategoriler" />
+          <NavigationProperty Name="Urunler" Relationship="Self.FK_Urunler_Kategoriler" FromRole="Kategoriler" ToRole="Urunler" />
+        </EntityType>
+        <EntityType Name="Kullanicilar">
+          <Key>
+            <PropertyRef Name="kullaniciID" />
+          </Key>
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="soyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kullanicisifre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Siparisler" Relationship="Self.FK_Siparisler_Kullanicilar" FromRole="Kullanicilar" ToRole="Siparisler" />
+        </EntityType>
+        <EntityType Name="SiparisDetay">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urunid" Type="Int32" Nullable="false" />
+          <Property Name="siparisid" Type="Int32" Nullable="false" />
+          <Property Name="gonderilecekid" Type="Int32" Nullable="false" />
+          <Property Name="gamacid" Type="Int32" Nullable="false" />
+          <Property Name="aliciad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="alicisoyad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="alicitelefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="aliciadres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kartmesaji" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="kartisim" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="adet" Type="Int32" Nullable="false" />
+          <Property Name="fiyat" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="birim" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GonderilecekYer" Relationship="Self.FK_SiparisDetay_GonderilecekYer" FromRole="SiparisDetay" ToRole="GonderilecekYer" />
+          <NavigationProperty Name="GonderimAmaci" Relationship="Self.FK_SiparisDetay_GonderimAmaci" FromRole="SiparisDetay" ToRole="GonderimAmaci" />
+          <NavigationProperty Name="Siparisler" Relationship="Self.FK_SiparisDetay_Siparisler" FromRole="SiparisDetay" ToRole="Siparisler" />
+          <NavigationProperty Name="Urunler" Relationship="Self.FK_SiparisDetay_Urunler" FromRole="SiparisDetay" ToRole="Urunler" />
+        </EntityType>
+        <EntityType Name="Siparisler">
+          <Key>
+            <PropertyRef Name="siparisid" />
+          </Key>
+          <Property Name="siparisid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" />
+          <Property Name="tarih" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tutar" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="odemesekli" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="siparisdurumu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Fatura" Relationship="Self.FK_Fatura_Siparisler" FromRole="Siparisler" ToRole="Fatura" />
+          <NavigationProperty Name="Kullanicilar" Relationship="Self.FK_Siparisler_Kullanicilar" FromRole="Siparisler" ToRole="Kullanicilar" />
+          <NavigationProperty Name="SiparisDetay" Relationship="Self.FK_SiparisDetay_Siparisler" FromRole="Siparisler" ToRole="SiparisDetay" />
+        </EntityType>
+        <EntityType Name="Urunler">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urunkodu" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="urunad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="altkategorino" Type="Int32" Nullable="false" />
+          <Property Name="kategorino" Type="Int32" Nullable="false" />
+          <Property Name="gonderimid" Type="Int32" Nullable="false" />
+          <Property Name="aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="adet" Type="Int32" Nullable="false" />
+          <Property Name="fiyat" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="birim" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="resimyolu1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="resimyolu2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="silindi" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AltKategoriler" Relationship="Self.FK_Urunler_AltKategoriler" FromRole="Urunler" ToRole="AltKategoriler" />
+          <NavigationProperty Name="GonderimAmaci" Relationship="Self.FK_Urunler_GonderimAmaci" FromRole="Urunler" ToRole="GonderimAmaci" />
+          <NavigationProperty Name="Kategoriler" Relationship="Self.FK_Urunler_Kategoriler" FromRole="Urunler" ToRole="Kategoriler" />
+          <NavigationProperty Name="SiparisDetay" Relationship="Self.FK_SiparisDetay_Urunler" FromRole="Urunler" ToRole="SiparisDetay" />
+        </EntityType>
+        <Association Name="FK_AltKategoriler_Kategoriler">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="1" />
+          <End Role="AltKategoriler" Type="Self.AltKategoriler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AltKategoriler">
+              <PropertyRef Name="kategorino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_AltKategoriler">
+          <End Role="AltKategoriler" Type="Self.AltKategoriler" Multiplicity="1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AltKategoriler">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="altkategorino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fatura_Siparisler">
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="1" />
+          <End Role="Fatura" Type="Self.Fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siparisler">
+              <PropertyRef Name="siparisid" />
+            </Principal>
+            <Dependent Role="Fatura">
+              <PropertyRef Name="siparisid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_GonderilecekYer">
+          <End Role="GonderilecekYer" Type="Self.GonderilecekYer" Multiplicity="1" />
+          <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GonderilecekYer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SiparisDetay">
+              <PropertyRef Name="gonderilecekid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_GonderimAmaci">
+          <End Role="GonderimAmaci" Type="Self.GonderimAmaci" Multiplicity="1" />
+          <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GonderimAmaci">
+              <PropertyRef Name="gonderimid" />
+            </Principal>
+            <Dependent Role="SiparisDetay">
+              <PropertyRef Name="gamacid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_GonderimAmaci">
+          <End Role="GonderimAmaci" Type="Self.GonderimAmaci" Multiplicity="1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GonderimAmaci">
+              <PropertyRef Name="gonderimid" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="gonderimid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Kategoriler">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="kategorino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Siparisler_Kullanicilar">
+          <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanicilar">
+              <PropertyRef Name="kullaniciID" />
+            </Principal>
+            <Dependent Role="Siparisler">
+              <PropertyRef Name="kullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_Siparisler">
+          <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="1" />
+          <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siparisler">
+              <PropertyRef Name="siparisid" />
+            </Principal>
+            <Dependent Role="SiparisDetay">
+              <PropertyRef Name="siparisid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_Urunler">
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="1" />
+          <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urunler">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SiparisDetay">
+              <PropertyRef Name="urunid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebCicekEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AltKategoriler" EntityType="Self.AltKategoriler" />
+          <EntitySet Name="Fatura" EntityType="Self.Fatura" />
+          <EntitySet Name="GonderilecekYer" EntityType="Self.GonderilecekYer" />
+          <EntitySet Name="GonderimAmaci" EntityType="Self.GonderimAmaci" />
+          <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" />
+          <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" />
+          <EntitySet Name="SiparisDetay" EntityType="Self.SiparisDetay" />
+          <EntitySet Name="Siparisler" EntityType="Self.Siparisler" />
+          <EntitySet Name="Urunler" EntityType="Self.Urunler" />
+          <AssociationSet Name="FK_AltKategoriler_Kategoriler" Association="Self.FK_AltKategoriler_Kategoriler">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="AltKategoriler" EntitySet="AltKategoriler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_AltKategoriler" Association="Self.FK_Urunler_AltKategoriler">
+            <End Role="AltKategoriler" EntitySet="AltKategoriler" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fatura_Siparisler" Association="Self.FK_Fatura_Siparisler">
+            <End Role="Siparisler" EntitySet="Siparisler" />
+            <End Role="Fatura" EntitySet="Fatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_GonderilecekYer" Association="Self.FK_SiparisDetay_GonderilecekYer">
+            <End Role="GonderilecekYer" EntitySet="GonderilecekYer" />
+            <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_GonderimAmaci" Association="Self.FK_SiparisDetay_GonderimAmaci">
+            <End Role="GonderimAmaci" EntitySet="GonderimAmaci" />
+            <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_GonderimAmaci" Association="Self.FK_Urunler_GonderimAmaci">
+            <End Role="GonderimAmaci" EntitySet="GonderimAmaci" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Kategoriler" Association="Self.FK_Urunler_Kategoriler">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Siparisler_Kullanicilar" Association="Self.FK_Siparisler_Kullanicilar">
+            <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+            <End Role="Siparisler" EntitySet="Siparisler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_Siparisler" Association="Self.FK_SiparisDetay_Siparisler">
+            <End Role="Siparisler" EntitySet="Siparisler" />
+            <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_Urunler" Association="Self.FK_SiparisDetay_Urunler">
+            <End Role="Urunler" EntitySet="Urunler" />
+            <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebCicekModelStoreContainer" CdmEntityContainer="WebCicekEntities">
+          <EntitySetMapping Name="AltKategoriler">
+            <EntityTypeMapping TypeName="WebCicekModel.AltKategoriler">
+              <MappingFragment StoreEntitySet="AltKategoriler">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="altkategoriad" ColumnName="altkategoriad" />
+                <ScalarProperty Name="kategorino" ColumnName="kategorino" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+                <ScalarProperty Name="silindi" ColumnName="silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fatura">
+            <EntityTypeMapping TypeName="WebCicekModel.Fatura">
+              <MappingFragment StoreEntitySet="Fatura">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="siparisid" ColumnName="siparisid" />
+                <ScalarProperty Name="faturabilgisi" ColumnName="faturabilgisi" />
+                <ScalarProperty Name="gönderenisim" ColumnName="gönderenisim" />
+                <ScalarProperty Name="gönderentelefon" ColumnName="gönderentelefon" />
+                <ScalarProperty Name="gönderenadres" ColumnName="gönderenadres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GonderilecekYer">
+            <EntityTypeMapping TypeName="WebCicekModel.GonderilecekYer">
+              <MappingFragment StoreEntitySet="GonderilecekYer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="konum" ColumnName="konum" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+                <ScalarProperty Name="silindi" ColumnName="silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GonderimAmaci">
+            <EntityTypeMapping TypeName="WebCicekModel.GonderimAmaci">
+              <MappingFragment StoreEntitySet="GonderimAmaci">
+                <ScalarProperty Name="gonderimid" ColumnName="gonderimid" />
+                <ScalarProperty Name="gonderimadi" ColumnName="gonderimadi" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+                <ScalarProperty Name="silindi" ColumnName="silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoriler">
+            <EntityTypeMapping TypeName="WebCicekModel.Kategoriler">
+              <MappingFragment StoreEntitySet="Kategoriler">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kategoriad" ColumnName="kategoriad" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+                <ScalarProperty Name="silindi" ColumnName="silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanicilar">
+            <EntityTypeMapping TypeName="WebCicekModel.Kullanicilar">
+              <MappingFragment StoreEntitySet="Kullanicilar">
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+                <ScalarProperty Name="adi" ColumnName="adi" />
+                <ScalarProperty Name="soyadi" ColumnName="soyadi" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="kullanicisifre" ColumnName="kullanicisifre" />
+                <ScalarProperty Name="silindi" ColumnName="silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiparisDetay">
+            <EntityTypeMapping TypeName="WebCicekModel.SiparisDetay">
+              <MappingFragment StoreEntitySet="SiparisDetay">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="urunid" ColumnName="urunid" />
+                <ScalarProperty Name="siparisid" ColumnName="siparisid" />
+                <ScalarProperty Name="gonderilecekid" ColumnName="gonderilecekid" />
+                <ScalarProperty Name="gamacid" ColumnName="gamacid" />
+                <ScalarProperty Name="aliciad" ColumnName="aliciad" />
+                <ScalarProperty Name="alicisoyad" ColumnName="alicisoyad" />
+                <ScalarProperty Name="alicitelefon" ColumnName="alicitelefon" />
+                <ScalarProperty Name="aliciadres" ColumnName="aliciadres" />
+                <ScalarProperty Name="kartmesaji" ColumnName="kartmesaji" />
+                <ScalarProperty Name="kartisim" ColumnName="kartisim" />
+                <ScalarProperty Name="adet" ColumnName="adet" />
+                <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+                <ScalarProperty Name="birim" ColumnName="birim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Siparisler">
+            <EntityTypeMapping TypeName="WebCicekModel.Siparisler">
+              <MappingFragment StoreEntitySet="Siparisler">
+                <ScalarProperty Name="siparisid" ColumnName="siparisid" />
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+                <ScalarProperty Name="tutar" ColumnName="tutar" />
+                <ScalarProperty Name="odemesekli" ColumnName="odemesekli" />
+                <ScalarProperty Name="siparisdurumu" ColumnName="siparisdurumu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Urunler">
+            <EntityTypeMapping TypeName="WebCicekModel.Urunler">
+              <MappingFragment StoreEntitySet="Urunler">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="urunkodu" ColumnName="urunkodu" />
+                <ScalarProperty Name="urunad" ColumnName="urunad" />
+                <ScalarProperty Name="altkategorino" ColumnName="altkategorino" />
+                <ScalarProperty Name="kategorino" ColumnName="kategorino" />
+                <ScalarProperty Name="gonderimid" ColumnName="gonderimid" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+                <ScalarProperty Name="adet" ColumnName="adet" />
+                <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+                <ScalarProperty Name="birim" ColumnName="birim" />
+                <ScalarProperty Name="resimyolu1" ColumnName="resimyolu1" />
+                <ScalarProperty Name="resimyolu2" ColumnName="resimyolu2" />
+                <ScalarProperty Name="silindi" ColumnName="silindi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
